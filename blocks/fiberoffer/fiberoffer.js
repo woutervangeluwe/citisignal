@@ -107,7 +107,7 @@ export default function decorate(block) {
                     const options = proposition["xdm:options"];
                     const content = JSON.parse(options[0]["xdm:content"]);
             
-                    console.log("Web-JSON Personalized Offer Content: " + content);
+                    console.log("Web-JSON Personalized Offer Content: " + content.text);
     
                     document.querySelector("#offerText").innerHTML = content.text;
                     document.querySelector("#offerCTA").innerHTML= content.cta;
