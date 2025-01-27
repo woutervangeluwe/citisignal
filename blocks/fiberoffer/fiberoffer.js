@@ -78,7 +78,7 @@ export default function decorate(block) {
       });
   
       if (response.status === 200) {
-        console.log("Offer received", response.text());
+        //console.log("Offer received", response.text());
 
         var xdm = JSON.parse(response.text());
         console.log("XDM: ", xdm);
