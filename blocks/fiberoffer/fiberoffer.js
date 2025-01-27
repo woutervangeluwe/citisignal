@@ -12,6 +12,8 @@ export default function decorate(block) {
     offerImage.id = 'offerImage';
     offerImage.className = 'offerImage';
 
+    document.querySelector("#offerCTA").innerHTML="test";
+
     const blockFiberOffer = document.createElement('blockFiberOffer');
     blockFiberOffer.textContent = fiberOfferWrapper.textContent.trim();
     fiberOfferWrapper.replaceChildren(blockFiberOffer);
