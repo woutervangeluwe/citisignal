@@ -78,7 +78,7 @@ export default function decorate(block) {
       });
   
       if (response.status === 200) {
-        console.log("Registration successful", response.body);
+        console.log("Offer received", response);
         document.querySelector("#offerText").innerHTML="Text";
         document.querySelector("#offerCTA").innerHTML="CTA";
         document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+item.data.deliveryURL+"'/>";
