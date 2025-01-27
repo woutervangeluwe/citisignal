@@ -1,8 +1,8 @@
 export default function decorate(block) {
     const [fiberOfferWrapper] = block.children;
   
-    offerText = block.children[0];
-    offerCTA = block.children[1];
+    const offerText = block.children[0];
+    const offerCTA = block.children[1];
 
     offerText.id = 'offerText';
     offerText.className = 'offerText';
