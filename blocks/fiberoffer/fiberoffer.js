@@ -79,9 +79,20 @@ export default function decorate(block) {
   
       if (response.status === 200) {
         console.log("Offer received", response);
+
+        const propositions = response["xdm:propositions"];
+
+        propositions.forEach(proposition => {
+            if (proposition.hasOwnProperty("xdm:fallback")) {
+                const fallback = proposition["xdm:fallback"];
+        
+                document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
+                console.log("Fallback Offer Delivery URL:", fallback["xdm:deliveryURL"]);
+            }
+        });
         document.querySelector("#offerText").innerHTML="Text";
         document.querySelector("#offerCTA").innerHTML="CTA";
-        document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+item.data.deliveryURL+"'/>";
+        
     
         
       } else {
