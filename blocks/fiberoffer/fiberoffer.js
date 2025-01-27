@@ -25,7 +25,7 @@ export default function decorate(block) {
 
   async function getOffer() {
     const url = "https://platform.adobe.io/data/core/ods/decisions";
-    
+
     var offerRequest = {
             "xdm:propositionRequests": [
                 {
@@ -71,7 +71,7 @@ export default function decorate(block) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer Bearer eyJhbGciOiJSUzI1NiIsIng1dSI6Imltc19uYTEta2V5LWF0LTEuY2VyIiwia2lkIjoiaW1zX25hMS1rZXktYXQtMSIsIml0dCI6ImF0In0.eyJpZCI6IjE3Mzc1ODIyNjkzMDFfNzhhYzA1YTUtN2FmNS00OThiLTgxZTctYzczNmExOTg1MmI2X3ZhNmMyIiwib3JnIjoiOTA3MDc1RTk1QkY0NzlFQzBBNDk1QzczQEFkb2JlT3JnIiwidHlwZSI6ImFjY2Vzc190b2tlbiIsImNsaWVudF9pZCI6ImVjMGZlMjE2YzJkNDQ0NWQ5MDJkMWYyM2RjMzZmZWNlIiwidXNlcl9pZCI6IkEyMzAxRTlBNjc3RTA2RDIwQTQ5NUU3NEB0ZWNoYWNjdC5hZG9iZS5jb20iLCJhcyI6Imltcy1uYTEiLCJhYV9pZCI6IkEyMzAxRTlBNjc3RTA2RDIwQTQ5NUU3NEB0ZWNoYWNjdC5hZG9iZS5jb20iLCJjdHAiOjMsIm1vaSI6IjNjOThjZmE4IiwiZXhwaXJlc19pbiI6Ijg2NDAwMDAwIiwiY3JlYXRlZF9hdCI6IjE3Mzc1ODIyNjkzMDEiLCJzY29wZSI6ImZpcmVmbHlfYXBpLG9wZW5pZCxBZG9iZUlELGZmX2FwaXMscmVhZF9vcmdhbml6YXRpb25zIn0.f1bICDP7J1UzZhHn15TgaJV7Z8KxfNYbldifR8T1V8GIdA42pylrf7vrdog5tFzIqxUemn4Sn5L5ry-tgMYKHUMG4lWu3amFGHmrj7W1EDzcTfh0Zgc1D8491LZh3LCM_rQjw68TMXP7IKKbHmkFaYz27HZmYMXQey2n4B0metuXzgRgd-1CM-aa1FqUp5WT7Z9Ij9ShC7I5IEB1RED0Mr3ss3GwXtIRRMf8dCf0Tjy5sS23Ol0eBxB1jCiLrPNbBWCTofaxUGiVXAzYyJqxi9DNXk-vUPdUy6FOM7s-ayqo-2cpAcrIAx_JYJiOsFmYykyAu0bZTNS-A-OEzdyubw",
+          "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsIng1dSI6Imltc19uYTEta2V5LWF0LTEuY2VyIiwia2lkIjoiaW1zX25hMS1rZXktYXQtMSIsIml0dCI6ImF0In0.eyJpZCI6IjE3Mzc5ODIzMzA5NzRfMjZlNWY0ZmItYzJjYy00MDQzLWI5MzktNWRjM2JlMjhjYzIzX3ZhNmMyIiwib3JnIjoiOTA3MDc1RTk1QkY0NzlFQzBBNDk1QzczQEFkb2JlT3JnIiwidHlwZSI6ImFjY2Vzc190b2tlbiIsImNsaWVudF9pZCI6ImI3ZDhhMWZjMzk2MjQyODg5YmIzMWRjODM2NDRlOTFkIiwidXNlcl9pZCI6IjhDRDMxRTU0NjczQzQ5RUUwQTQ5NUUwNUB0ZWNoYWNjdC5hZG9iZS5jb20iLCJhcyI6Imltcy1uYTEiLCJhYV9pZCI6IjhDRDMxRTU0NjczQzQ5RUUwQTQ5NUUwNUB0ZWNoYWNjdC5hZG9iZS5jb20iLCJjdHAiOjMsIm1vaSI6ImFiZGUwOWU5IiwiZXhwaXJlc19pbiI6Ijg2NDAwMDAwIiwic2NvcGUiOiJvcGVuaWQsc2Vzc2lvbixBZG9iZUlELHJlYWRfb3JnYW5pemF0aW9ucyxhZGRpdGlvbmFsX2luZm8ucHJvamVjdGVkUHJvZHVjdENvbnRleHQiLCJjcmVhdGVkX2F0IjoiMTczNzk4MjMzMDk3NCJ9.IasxbxKa8LDBqA40UKJAYSb7XqvmaPlgOMJTDArcrPFeW-1AMzd8DmhcsHrgMSUmKAz73lH7fH7SoWGroFD_j49orIcImIIJwuzPYnRtMtOwpI4IIamiznqe-8bw51Vn-GK3-lHlRr9tBgQVkimLd6UoBPbpWPcYsjhENDsxMsBhiggjKPsQcSxefjoZUzja66d8iHJ2JWGFxoilSJRpKJZzyR99Kti0Zr7h1WESnPt5Awc5OWJQ7RSY5OcK7PwF7tl8XlQCJiSLsTMUXvkG0c-c4eF2d2AaUBaKx38fFZ6qClXA6m2xzE0kJqUcjQMWxytS3cmKK55-BXBEThviOw",
           "x-api-key": "ec0fe216c2d4445d902d1f23dc36fece",
           "x-gw-ims-org-id": "907075E95BF479EC0A495C73@AdobeOrg",
           "Content-Type": "application/vnd.adobe.xdm+json; schema='https://ns.adobe.com/experience/offer-management/decision-request;version=1.0'",
