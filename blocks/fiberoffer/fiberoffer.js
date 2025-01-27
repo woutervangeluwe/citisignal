@@ -40,7 +40,7 @@ export default function decorate(block) {
                   "xdm:identityMap": {
                     "EMAIL": [
                     {
-                        "xdm:id": "woutervangeluwe+06012025-02@gmail.com"
+                        "xdm:id": "woutervangeluwe+06012025-03@gmail.com"
                     }
                     ]
                 },
@@ -99,6 +99,7 @@ export default function decorate(block) {
                 const content = JSON.parse(options[0]["xdm:content"]);
         
                 document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["xdm:deliveryURL"]+"'/>";
+                console.log("Personalized Offer Delivery URL:", content["xdm:deliveryURL"]);
             }
         });
 
@@ -180,14 +181,16 @@ export default function decorate(block) {
                 const fallback = proposition["xdm:fallback"];
                 const content = fallback["xdm:content"]
 
-                console.log("Content: ", content)
+                console.log("JSON Fallback Content: ", content)
         
                 document.querySelector("#offerText").innerHTML = content.text;
                 document.querySelector("#offerCTA").innerHTML= content.cta;
             }else{
                 const options = proposition["xdm:options"];
-                const content = options[0]["xdm:content"]
+                const content = JSON.parse(options[0]["xdm:content"]);
         
+                console.log("JSON Persoanlized Offer Content: " + content.text, content);
+
                 document.querySelector("#offerText").innerHTML = content.text;
                 document.querySelector("#offerCTA").innerHTML= content.cta;
             }
