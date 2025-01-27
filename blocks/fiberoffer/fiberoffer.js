@@ -80,7 +80,7 @@ export default function decorate(block) {
       if (response.status === 200) {
         console.log("Offer received", response);
 
-        if (response.hasOwnProperty('xdm:propositions')){
+        if (JSON.parse(response).hasOwnProperty('xdm:propositions')){
             console.log("YESYESYES");
         }else{
             console.log("NONONO");
