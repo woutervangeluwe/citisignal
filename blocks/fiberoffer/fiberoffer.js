@@ -121,11 +121,10 @@ export default function decorate(block) {
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
                 }else{
                     const options = proposition["xdm:options"];
-                    const content = JSON.parse(options[0]["xdm:content"]);
-                    console.log("Web-JSON Personalized Offer Content: ", content)
+                    console.log("Web-JSON Personalized Offer Content: ", options)
             
-                    document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["xdm:deliveryURL"]+"'/>";
-                    console.log("Personalized Offer Delivery URL:", content["xdm:deliveryURL"]);
+                    document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+options["xdm:deliveryURL"]+"'/>";
+                    console.log("Personalized Offer Delivery URL:", options["xdm:deliveryURL"]);
                 }
             }
         });
