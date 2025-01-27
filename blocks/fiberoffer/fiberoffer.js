@@ -93,7 +93,7 @@ export default function decorate(block) {
         const propositions = body["xdm:propositions"];
 
         propositions.forEach(proposition => {
-            if(proposition["xdm:placement"]["xdm:name"] = "Web - JSON"){
+            if(proposition["xdm:placement"]["xdm:name"] == "Web - JSON"){
                 console.log("Web-JSON proposition");
                 if (proposition.hasOwnProperty("xdm:fallback")) {
                     const fallback = proposition["xdm:fallback"];
@@ -112,7 +112,7 @@ export default function decorate(block) {
                     document.querySelector("#offerText").innerHTML = content.text;
                     document.querySelector("#offerCTA").innerHTML= content.cta;
                 }
-            }else if(proposition["xdm:placement"]["xdm:name"] = "Web - Image"){
+            }else if(proposition["xdm:placement"]["xdm:name"] == "Web - Image"){
                 console.log("Web-Image proposition");
                 if (proposition.hasOwnProperty("xdm:fallback")) {
                     const fallback = proposition["xdm:fallback"];
@@ -121,7 +121,7 @@ export default function decorate(block) {
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
                 }else{
                     const options = proposition["xdm:options"];
-                    const content = JSON.parse(options[0]["xdm:content"]);
+                    const content = options[0]["xdm:content"];
                     console.log("Web-JSON Personalized Offer Content: ", content)
             
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["xdm:deliveryURL"]+"'/>";
@@ -129,9 +129,11 @@ export default function decorate(block) {
                 }
             }
         });
+
         document.querySelector("#offerImage").style.display="block";
         document.querySelector("#offerText").style.display="block";
         document.querySelector("#offerCTA").style.display="block";
+
       } else {
         console.warn("Offer Decisioning Response unsuccessful:", response.body);
       }
