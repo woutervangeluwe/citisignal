@@ -120,7 +120,7 @@ export default function decorate(block) {
             
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
                 }else{
-                    const options = proposition["xdm:options"];
+                    const options = proposition["xdm:options"][0];
                     console.log("Web-JSON Personalized Offer Content: ", options)
             
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+options["xdm:deliveryURL"]+"'/>";
