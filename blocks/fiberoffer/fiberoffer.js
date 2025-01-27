@@ -5,8 +5,6 @@ export default function decorate(block) {
     const offerCTA = block.children[1];
     const offerImage = block.children[2];
 
-    const url = "https://platform.adobe.io/data/core/ods/decisions";
-
     offerText.id = 'offerText';
     offerText.className = 'offerText';
     offerCTA.id = 'offerCTA';
@@ -26,6 +24,8 @@ export default function decorate(block) {
   }
 
   async function getOffer() {
+    const url = "https://platform.adobe.io/data/core/ods/decisions";
+    
     var offerRequest = {
             "xdm:propositionRequests": [
                 {
