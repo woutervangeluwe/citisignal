@@ -1,9 +1,11 @@
 .block.fiberoffer {
-    background-color: #ccc;
+    background-color: #8821F4;
+    color: #14161A;
     padding: 0 0 24px;
     display: flex;
     flex-direction: column;
     margin: 1rem 0;
+    text-align: center;
 }
 
 .block.fiberoffer blockfiberoffer {
