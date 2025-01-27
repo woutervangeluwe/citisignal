@@ -12,6 +12,10 @@ export default function decorate(block) {
     offerImage.id = 'offerImage';
     offerImage.className = 'offerImage';
 
+    document.querySelector("#offerText").style.display="none";
+    document.querySelector("#offerCTA").style.display="none";
+    document.querySelector("#offerImage").style.display="none";
+
    const blockFiberOffer = document.createElement('blockFiberOffer');
     blockFiberOffer.textContent = fiberOfferWrapper.textContent.trim();
     fiberOfferWrapper.replaceChildren(blockFiberOffer);
@@ -79,13 +83,7 @@ export default function decorate(block) {
   
       if (response.status === 200) {
         var body = await response.json();
-        console.log("body: ", body);
-
-        if (body.hasOwnProperty('xdm:propositions')){
-            console.log("YESYESYES");
-        }else{
-            console.log("NONONO");
-        }
+        console.log("Offer Decisioning Response: ", body);
 
         const propositions = body["xdm:propositions"];
 
@@ -97,8 +95,12 @@ export default function decorate(block) {
                 console.log("Fallback Offer Delivery URL:", fallback["xdm:deliveryURL"]);
             }
         });
-        document.querySelector("#offerText").innerHTML="Text";
-        document.querySelector("#offerCTA").innerHTML="CTA";
+        document.querySelector("#offerText").innerHTML="Text from Offer";
+        document.querySelector("#offerCTA").innerHTML="CTA from Offer";
+
+        document.querySelector("#offerText").style.display="block";
+        document.querySelector("#offerCTA").style.display="block";
+        document.querySelector("#offerImage").style.display="block";
         
     
         
