@@ -44,7 +44,7 @@ export default function decorate(block) {
                   "xdm:identityMap": {
                     "EMAIL": [
                     {
-                        "xdm:id": "woutervangeluwe+06012025-06@gmail.com"
+                        "xdm:id": "woutervangeluwe+06012025-07@gmail.com"
                     }
                     ]
                 },
