@@ -78,21 +78,16 @@ export default function decorate(block) {
       });
   
       if (response.status === 200) {
-        //console.log("Offer received", response.text());
-
         var body = await response.json();
         console.log("body: ", body);
 
-        var xdm = JSON.parse(response.text());
-        console.log("XDM: ", xdm);
-
-        if (response.json.hasOwnProperty('xdm:propositions')){
+        if (body.hasOwnProperty('xdm:propositions')){
             console.log("YESYESYES");
         }else{
             console.log("NONONO");
         }
 
-        const propositions = response["xdm:propositions"];
+        const propositions = body["xdm:propositions"];
 
         propositions.forEach(proposition => {
             if (proposition.hasOwnProperty("xdm:fallback")) {
