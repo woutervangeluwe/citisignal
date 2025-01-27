@@ -78,7 +78,13 @@ export default function decorate(block) {
       });
   
       if (response.status === 200) {
-        console.log("Offer received", response["xdm:propositions"]);
+        console.log("Offer received", response);
+
+        if (response.hasOwnProperty('xdm:propositions')){
+            console.log("YESYESYES");
+        }else{
+            console.log("NONONO");
+        }
 
         const propositions = response["xdm:propositions"];
 
