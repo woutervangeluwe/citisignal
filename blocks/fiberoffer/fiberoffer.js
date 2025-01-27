@@ -71,7 +71,7 @@ export default function decorate(block) {
           "x-api-key": "b7d8a1fc396242889bb31dc83644e91d",
           "x-gw-ims-org-id": "907075E95BF479EC0A495C73@AdobeOrg",
           "Content-Type": 'application/vnd.adobe.xdm+json; schema="https://ns.adobe.com/experience/offer-management/decision-request;version=1.0"',
-          "Accept": 'application/vnd.adobe.xdm+json; schema="https://ns.adobe.com/experience/offer-management/decision-response;version=1.0"',
+          "Accept": 'application/json',
           "x-sandbox-name": "tech-insiders"
         },
         body: JSON.stringify(offerRequest),
