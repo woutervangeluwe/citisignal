@@ -97,7 +97,7 @@ export default function decorate(block) {
                 console.log("Web-JSON proposition");
                 if (proposition.hasOwnProperty("xdm:fallback")) {
                     const fallback = proposition["xdm:fallback"];
-                    const content = fallback["xdm:content"]
+                    const content = JSON.parse(fallback["xdm:content"]);
     
                     console.log("Web-JSON Fallback Content: ", content)
             
@@ -121,7 +121,7 @@ export default function decorate(block) {
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
                 }else{
                     const options = proposition["xdm:options"][0];
-                    console.log("Web-JSON Personalized Offer Content: ", options)
+                    console.log("Web-Image Personalized Offer Content: ", options)
             
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+options["xdm:deliveryURL"]+"'/>";
                     console.log("Personalized Offer Delivery URL:", options["xdm:deliveryURL"]);
