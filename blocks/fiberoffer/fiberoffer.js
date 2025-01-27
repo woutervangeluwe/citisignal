@@ -78,7 +78,10 @@ export default function decorate(block) {
       });
   
       if (response.status === 200) {
-        console.log("Offer received", response.json);
+        console.log("Offer received", response.text());
+
+        var xdm = JSON.parse(response.text());
+        console.log("XDM: ", xdm);
 
         if (response.json.hasOwnProperty('xdm:propositions')){
             console.log("YESYESYES");
