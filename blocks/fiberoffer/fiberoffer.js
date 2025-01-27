@@ -80,6 +80,9 @@ export default function decorate(block) {
       if (response.status === 200) {
         //console.log("Offer received", response.text());
 
+        var body = await response.json();
+        console.log("body: ", body);
+
         var xdm = JSON.parse(response.text());
         console.log("XDM: ", xdm);
 
