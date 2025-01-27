@@ -107,7 +107,7 @@ export default function decorate(block) {
                     const options = proposition["xdm:options"];
                     const content = JSON.parse(options[0]["xdm:content"]);
             
-                    console.log("Web-JSON Persoanlized Offer Content: " + content.text, content);
+                    console.log("Web-JSON Personalized Offer Content: " + content);
     
                     document.querySelector("#offerText").innerHTML = content.text;
                     document.querySelector("#offerCTA").innerHTML= content.cta;
@@ -121,7 +121,7 @@ export default function decorate(block) {
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
                 }else{
                     const options = proposition["xdm:options"];
-                    const content = options[0]["xdm:content"];
+                    const content = JSON.parse(options[0]["xdm:content"]);
                     console.log("Web-JSON Personalized Offer Content: ", content)
             
                     document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["xdm:deliveryURL"]+"'/>";
