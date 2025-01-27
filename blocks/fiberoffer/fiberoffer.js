@@ -96,7 +96,7 @@ export default function decorate(block) {
                 console.log("Fallback Offer Delivery URL:", fallback["xdm:deliveryURL"]);
             }else{
                 const options = proposition["xdm:options"];
-                const content = options[0]["xdm:content"]
+                const content = JSON.parse(options[0]["xdm:content"]);
         
                 document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["xdm:deliveryURL"]+"'/>";
             }
@@ -178,12 +178,15 @@ export default function decorate(block) {
         propositions.forEach(proposition => {
             if (proposition.hasOwnProperty("xdm:fallback")) {
                 const fallback = proposition["xdm:fallback"];
+                const content = fallback["xdm:content"]
+
+                console.log("Content: ", content)
         
-                document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
-                console.log("Fallback Offer Delivery URL:", fallback["xdm:deliveryURL"]);
+                document.querySelector("#offerText").innerHTML = content.text;
+                document.querySelector("#offerCTA").innerHTML= content.cta;
             }else{
                 const options = proposition["xdm:options"];
-                const content = options[0]["xdm:content"].json()
+                const content = options[0]["xdm:content"]
         
                 document.querySelector("#offerText").innerHTML = content.text;
                 document.querySelector("#offerCTA").innerHTML= content.cta;
