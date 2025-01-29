@@ -117,7 +117,7 @@ export default function decorate(block) {
             const decisions = body["handle"];
     
             decisions.forEach(decision => {
-              if(decision["type"] = "personalization:decisions"){
+              if(decision["type"] == "personalization:decisions"){
                 console.log("Offer Decisioning decision detail: ", decision);
                 const payloads = decision["payload"];
     
