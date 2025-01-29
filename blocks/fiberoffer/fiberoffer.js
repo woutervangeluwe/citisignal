@@ -40,7 +40,7 @@ export default function decorate(block) {
   }
 
   async function getOffer() {
-
+    var url = "https://edge.adobedc.net/ee/irl1/v1/interact?configId=045c5ee9-468f-47d5-ae9b-a29788f5948f";
     const ECID = alloy("getIdentity",{
       "namespaces": ["ECID"]
     });
