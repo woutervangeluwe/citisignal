@@ -43,7 +43,7 @@ export default function decorate(block) {
           // The command succeeded.
           console.log("ECID:", result.identity.ECID);
           ECID = result.identity.ECID;
-          getOffer();
+          getOffer(ECID);
           
         })
         .catch(function(error) {
@@ -56,7 +56,7 @@ export default function decorate(block) {
 
 
   
-      async function getOffer() {
+      async function getOffer(ECID) {
         var url = "https://edge.adobedc.net/ee/irl1/v1/interact?configId=045c5ee9-468f-47d5-ae9b-a29788f5948f";
     
         
