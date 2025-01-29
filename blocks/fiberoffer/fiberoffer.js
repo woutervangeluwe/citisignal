@@ -41,11 +41,18 @@ export default function decorate(block) {
 
   async function getOffer() {
     var url = "https://edge.adobedc.net/ee/irl1/v1/interact?configId=045c5ee9-468f-47d5-ae9b-a29788f5948f";
-    const ECID = alloy("getIdentity",{
-      "namespaces": ["ECID"]
-    });
 
-    console.log("ECID: " + ECID);
+    var ECID = "";
+    alloy("getIdentity")
+      .then(function(result) {
+        // The command succeeded.
+        console.log("ECID:", result.identity.ECID);
+        ECID = result.identity.ECID;
+      })
+      .catch(function(error) {
+        // The command failed.
+        // "error" will be an error object with additional information.
+      });
 
     var offerRequest = {
       "events": [
