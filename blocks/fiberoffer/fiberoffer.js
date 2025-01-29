@@ -72,48 +72,53 @@ export default function decorate(block) {
         var body = await response.json();
         console.log("Offer Decisioning Response: ", body);
 
-        const payloads = body[0]["payload"];
+        const decisions = body[0]["handle"];
 
-        payloads.forEach(payload => {
-          if(payload["placement"]["name"] == "Web - Image"){
-            console.log("Web-Image payload");
-            const items = payload["items"];
-            items.forEach(item => {
-              if (item["id"].includes("dps:fallback-offer")) {
-                const content = JSON.parse(item["data"]["content"]);
-                console.log("Web-Image Personalized Offer Content: ", content)
-            
-                document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
-                console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
-              }else if (item["id"].includes("dps:personalized-offer")) {
-                const content = JSON.parse(item["data"]["content"]);
-                console.log("Web-Image Personalized Offer Content: ", content)
-            
-                document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
-                console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
-              }
-            });
-          } else if (payload["placement"]["name"] == "Web - JSON"){
-              console.log("Web-JSON payload");
-              const items = payload["items"];
-              items.forEach(item => {
-                if (item["id"].includes("dps:fallback-offer")) {
+        decisions.forEach(decision => {
+          if(decision["type"] = "personalization:decisions"){
+            const payloads = decision;
+            payloads.forEach(payload => {
+              if(payload["placement"]["name"] == "Web - Image"){
+                console.log("Web-Image payload");
+                const items = payload["items"];
+                items.forEach(item => {
+                  if (item["id"].includes("dps:fallback-offer")) {
                     const content = JSON.parse(item["data"]["content"]);
-      
-                    console.log("Web-JSON Fallback Content: ", content)
-              
-                    document.querySelector("#offerText").innerHTML = content.text;
-                    document.querySelector("#offerCTA").innerHTML= content.cta;
-                }else if (item["id"].includes("dps:personalized-offer")) {
-                  const content = JSON.parse(item["data"]["content"]);
-              
-                  console.log("Web-JSON Personalized Offer Content: " + content);
-      
-                  document.querySelector("#offerText").innerHTML = content.text;
-                  document.querySelector("#offerCTA").innerHTML= content.cta;
+                    console.log("Web-Image Personalized Offer Content: ", content)
+                
+                    document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
+                    console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
+                  }else if (item["id"].includes("dps:personalized-offer")) {
+                    const content = JSON.parse(item["data"]["content"]);
+                    console.log("Web-Image Personalized Offer Content: ", content)
+                
+                    document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
+                    console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
+                  }
+                });
+              } else if (payload["placement"]["name"] == "Web - JSON"){
+                  console.log("Web-JSON payload");
+                  const items = payload["items"];
+                  items.forEach(item => {
+                    if (item["id"].includes("dps:fallback-offer")) {
+                        const content = JSON.parse(item["data"]["content"]);
+          
+                        console.log("Web-JSON Fallback Content: ", content)
+                  
+                        document.querySelector("#offerText").innerHTML = content.text;
+                        document.querySelector("#offerCTA").innerHTML= content.cta;
+                    }else if (item["id"].includes("dps:personalized-offer")) {
+                      const content = JSON.parse(item["data"]["content"]);
+                  
+                      console.log("Web-JSON Personalized Offer Content: " + content);
+          
+                      document.querySelector("#offerText").innerHTML = content.text;
+                      document.querySelector("#offerCTA").innerHTML= content.cta;
+                    }
+                  });
                 }
-              });
-            }
+            });
+          }
         });
 
         document.querySelector("#offerImage").style.display="block";
