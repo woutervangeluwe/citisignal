@@ -88,18 +88,16 @@ export default function decorate(block) {
                   const items = payload["items"];
                   items.forEach(item => {
                     if (item["id"].includes("dps:fallback-offer")) {
-                      const content = JSON.parse(item["data"]["content"]);
-                      console.log("Web-Image Personalized Offer Content: ", content)
+                      console.log("Item details: ", item);
+                      const deliveryURL = item["data"]["deliveryURL"];
                   
-                      document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
-                      console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
+                      document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+item["data"]["deliveryURL"]+"'/>";
                     }else if (item["id"].includes("dps:personalized-offer")) {
                       console.log("Item details: ", item);
-                      const content = JSON.parse(item["data"]["content"]);
-                      console.log("Web-Image Personalized Offer Content: ", content)
+                      const deliveryURL = item["data"]["deliveryURL"];
+                      console.log("Web-Image Personalized Offer Content: ", deliveryURL)
                   
-                      document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
-                      console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
+                      document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+item["data"]["deliveryURL"]+"'/>";
                     }
                   });
                 } else if (payload["placement"]["name"] == "Web - JSON"){
