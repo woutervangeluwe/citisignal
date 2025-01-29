@@ -63,7 +63,6 @@ async function getOffer(ECID) {
     "events": [
       {
         "xdm": {
-          "eventType": "web.webpagedetails.pageViews",
           "timestamp": timestamp,
           "identityMap": {
             "ECID": [
@@ -77,26 +76,14 @@ async function getOffer(ECID) {
         },
         "query": {
           "personalization": {
-            "schemas": [
-              "https://ns.adobe.com/personalization/default-content-item",
-              "https://ns.adobe.com/personalization/html-content-item",
-              "https://ns.adobe.com/personalization/json-content-item"
-            ],
             "decisionScopes": [
               "eyJ4ZG06YWN0aXZpdHlJZCI6ImRwczpvZmZlci1hY3Rpdml0eToxYTI0ZGY1M2NjOTBjMzg2IiwieGRtOnBsYWNlbWVudElkIjoiZHBzOm9mZmVyLXBsYWNlbWVudDoxYTI0ZGM2MWJmYjJlMjIwIn0=",
-              //"eyJ4ZG06YWN0aXZpdHlJZCI6ImRwczpvZmZlci1hY3Rpdml0eToxYTI0ZGY1M2NjOTBjMzg2IiwieGRtOnBsYWNlbWVudElkIjoiZHBzOm9mZmVyLXBsYWNlbWVudDoxYTI0ZGM0MzQyZjJlMjFlIn0="
+              "eyJ4ZG06YWN0aXZpdHlJZCI6ImRwczpvZmZlci1hY3Rpdml0eToxYTI0ZGY1M2NjOTBjMzg2IiwieGRtOnBsYWNlbWVudElkIjoiZHBzOm9mZmVyLXBsYWNlbWVudDoxYTI0ZGM0MzQyZjJlMjFlIn0="
             ]
           }
         }
       }
-    ],
-    "query": {
-      "identity": {
-        "fetch": [
-          "ECID"
-        ]
-      }
-    }
+    ]
   }
 
   try {
