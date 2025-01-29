@@ -1,4 +1,25 @@
 export default function decorate(block) {
+  var script1 = document.createElement('script');
+  script1.onload = function () {
+    !function(n,o){o.forEach(function(o){n[o]||((n.__alloyNS=n.__alloyNS||
+    []).push(o),n[o]=function(){var u=arguments;return new Promise(
+    function(i,l){n[o].q.push([i,l,u])})},n[o].q=[])})}
+    (window,["alloy"]);
+  };
+  document.head.appendChild(script1);
+
+  var script2 = document.createElement('script');
+  script2.async = true;
+  script2.src = "https://cdn1.adoberesources.net/alloy/2.14.0/alloy.min.js";
+
+  document.head.appendChild(script2);
+
+    alloy("configure", {
+      "edgeConfigId": "045c5ee9-468f-47d5-ae9b-a29788f5948f",
+      "orgId":"907075E95BF479EC0A495C73@AdobeOrg",
+      "defaultConsent":"in"
+    });
+
     const [fiberOfferWrapper] = block.children;
   
     const offerText = block.children[0];
@@ -24,7 +45,12 @@ export default function decorate(block) {
   }
 
   async function getOffer() {
-    const url = "https://edge.adobedc.net/ee/irl1/v1/interact?configId=045c5ee9-468f-47d5-ae9b-a29788f5948f";
+
+    const ECID = alloy("getIdentity",{
+      "namespaces": ["ECID"]
+    });
+
+    console.log("ECID: " + ECID);
 
     var offerRequest = {
       "events": [
@@ -33,10 +59,10 @@ export default function decorate(block) {
             "eventType": "web.webpagedetails.pageViews",
             "timestamp": "2025-01-29T09:29:52.286Z",
             "identityMap": {
-              "Email": [
+              "ECID": [
                 {
                   "authenticatedState": "authenticated",
-                  "id": "woutervangeluwe+06012025-35@gmail.com",
+                  "id": '"'+ECID+'"',
                   "primary": true
                 }
               ]
