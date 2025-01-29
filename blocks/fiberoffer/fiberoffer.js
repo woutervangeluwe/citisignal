@@ -91,7 +91,14 @@ export default function decorate(block) {
                 }
               }
             }
-          ]
+          ],
+          "query": {
+            "identity": {
+              "fetch": [
+                "ECID"
+              ]
+            }
+          }
         }
     
         try {
