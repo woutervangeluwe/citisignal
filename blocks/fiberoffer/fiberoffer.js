@@ -72,7 +72,7 @@ export default function decorate(block) {
         var body = await response.json();
         console.log("Offer Decisioning Response: ", body);
 
-        const decisions = body[0]["handle"];
+        const decisions = body["handle"];
 
         decisions.forEach(decision => {
           if(decision["type"] = "personalization:decisions"){
