@@ -24,52 +24,40 @@ export default function decorate(block) {
   }
 
   async function getOffer() {
-    const url = "https://platform.adobe.io/data/core/ods/decisions";
+    const url = "https://edge.adobedc.net/ee/irl1/v1/interact?configId=045c5ee9-468f-47d5-ae9b-a29788f5948f";
 
     var offerRequest = {
-            "xdm:propositionRequests": [
+      "events": [
+        {
+          "xdm": {
+            "eventType": "web.webpagedetails.pageViews",
+            "timestamp": "2025-01-29T09:29:52.286Z",
+            "identityMap": {
+              "Email": [
                 {
-                  "xdm:placementId": "dps:offer-placement:1a24dc4342f2e21e",
-                  "xdm:activityId": "dps:offer-activity:1a24df53cc90c386",
-                  "xdm:itemCount": 1
-                },
-                {
-                  "xdm:placementId": "dps:offer-placement:1a24dc61bfb2e220",
-                  "xdm:activityId": "dps:offer-activity:1a24df53cc90c386",
-                  "xdm:itemCount": 1
+                  "authenticatedState": "authenticated",
+                  "id": "woutervangeluwe+06012025-25@gmail.com",
+                  "primary": true
                 }
-            ],
-            "xdm:profiles": [
-                {
-                  "xdm:identityMap": {
-                    "EMAIL": [
-                    {
-                        "xdm:id": "woutervangeluwe+06012025-07@gmail.com"
-                    }
-                    ]
-                },
-                "xdm:decisionRequestId": "0AA00002-0000-1224-c0de-cjf98Csj43"
-                }
-            ],
-            "xdm:allowDuplicatePropositions": {
-                "xdm:acrossActivities": true,
-                "xdm:acrossPlacements": true
-            },
-            "xdm:responseFormat": {
-                "xdm:includeContent": true,
-                "xdm:includeMetadata": {
-                "xdm:activity": [
-                    "name"
-                ],
-                "xdm:option": [
-                    "name"
-                ],
-                "xdm:placement": [
-                    "name"
-                ]
-                }
+              ]
+            }
+          },
+          "query": {
+            "personalization": {
+              "schemas": [
+                "https://ns.adobe.com/personalization/default-content-item",
+                "https://ns.adobe.com/personalization/html-content-item",
+                "https://ns.adobe.com/personalization/json-content-item"
+              ],
+              "decisionScopes": [
+                "eyJ4ZG06YWN0aXZpdHlJZCI6ImRwczpvZmZlci1hY3Rpdml0eToxYTI0ZGY1M2NjOTBjMzg2IiwieGRtOnBsYWNlbWVudElkIjoiZHBzOm9mZmVyLXBsYWNlbWVudDoxYTI0ZGM2MWJmYjJlMjIwIn0=",
+                "eyJ4ZG06YWN0aXZpdHlJZCI6ImRwczpvZmZlci1hY3Rpdml0eToxYTI0ZGY1M2NjOTBjMzg2IiwieGRtOnBsYWNlbWVudElkIjoiZHBzOm9mZmVyLXBsYWNlbWVudDoxYTI0ZGM0MzQyZjJlMjFlIn0="
+              ]
             }
           }
+        }
+      ]
+    }
 
     try {
       const response = await fetch(url, {
@@ -90,42 +78,47 @@ export default function decorate(block) {
         var body = await response.json();
         console.log("Offer Decisioning Response: ", body);
 
-        const propositions = body["xdm:propositions"];
+        const payloads = body[0]["payload"];
 
-        propositions.forEach(proposition => {
-            if(proposition["xdm:placement"]["xdm:name"] == "Web - JSON"){
-                console.log("Web-JSON proposition");
-                if (proposition.hasOwnProperty("xdm:fallback")) {
-                    const fallback = proposition["xdm:fallback"];
-                    const content = JSON.parse(fallback["xdm:content"]);
-    
+        payloads.forEach(payload => {
+          if(payload["placement"]["name"] == "Web - Image"){
+            console.log("Web-Image payload");
+            const items = payload["items"];
+            items.forEach(item => {
+              if (item["id"].includes("dps:fallback-offer")) {
+                const content = JSON.parse(item["data"]["content"]);
+                console.log("Web-Image Personalized Offer Content: ", content)
+            
+                document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
+                console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
+              }else if (item["id"].includes("dps:personalized-offer")) {
+                const content = JSON.parse(item["data"]["content"]);
+                console.log("Web-Image Personalized Offer Content: ", content)
+            
+                document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
+                console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
+              }
+            });
+          } else if (payload["placement"]["name"] == "Web - JSON"){
+              console.log("Web-JSON payload");
+              const items = payload["items"];
+              items.forEach(item => {
+                if (item["id"].includes("dps:fallback-offer")) {
+                    const content = JSON.parse(item["data"]["content"]);
+      
                     console.log("Web-JSON Fallback Content: ", content)
-            
+              
                     document.querySelector("#offerText").innerHTML = content.text;
                     document.querySelector("#offerCTA").innerHTML= content.cta;
-                }else{
-                    const options = proposition["xdm:options"];
-                    const content = JSON.parse(options[0]["xdm:content"]);
-            
-                    console.log("Web-JSON Personalized Offer Content: " + content.text);
-    
-                    document.querySelector("#offerText").innerHTML = content.text;
-                    document.querySelector("#offerCTA").innerHTML= content.cta;
+                }else if (item["id"].includes("dps:personalized-offer")) {
+                  const content = JSON.parse(item["data"]["content"]);
+              
+                  console.log("Web-JSON Personalized Offer Content: " + content);
+      
+                  document.querySelector("#offerText").innerHTML = content.text;
+                  document.querySelector("#offerCTA").innerHTML= content.cta;
                 }
-            }else if(proposition["xdm:placement"]["xdm:name"] == "Web - Image"){
-                console.log("Web-Image proposition");
-                if (proposition.hasOwnProperty("xdm:fallback")) {
-                    const fallback = proposition["xdm:fallback"];
-                    console.log("Web-JSON Fallback Offer Content: ", fallback)
-            
-                    document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+fallback["xdm:deliveryURL"]+"'/>";
-                }else{
-                    const options = proposition["xdm:options"][0];
-                    console.log("Web-Image Personalized Offer Content: ", options)
-            
-                    document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+options["xdm:deliveryURL"]+"'/>";
-                    console.log("Personalized Offer Delivery URL:", options["xdm:deliveryURL"]);
-                }
+              });
             }
         });
 
