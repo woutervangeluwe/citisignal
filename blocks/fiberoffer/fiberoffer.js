@@ -94,6 +94,7 @@ export default function decorate(block) {
                       document.querySelector("#offerImage").innerHTML="<img style='max-width:100%;' src='"+content["data"]["content"]+"'/>";
                       console.log("Personalized Offer Delivery URL:", content["data"]["content"]);
                     }else if (item["id"].includes("dps:personalized-offer")) {
+                      console.log("Item details: ", item);
                       const content = JSON.parse(item["data"]["content"]);
                       console.log("Web-Image Personalized Offer Content: ", content)
                   
