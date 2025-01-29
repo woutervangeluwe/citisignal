@@ -64,6 +64,13 @@ async function getOffer(ECID) {
       {
         "xdm": {
           "timestamp": timestamp,
+          "_experienceplatform": {
+            "identification": {
+              "core": {
+                "ecid": ECID
+              }
+            }
+          },
           "identityMap": {
             "ECID": [
               {
