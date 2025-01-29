@@ -75,9 +75,7 @@ async function getOffer(ECID) {
           "identityMap": {
             "ECID": [
               {
-                "authenticatedState": "authenticated",
-                "id": ECID,
-                "primary": true
+                "id": ECID
               }
             ]
           }
