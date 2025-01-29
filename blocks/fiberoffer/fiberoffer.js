@@ -63,6 +63,7 @@ async function getOffer(ECID) {
     "events": [
       {
         "xdm": {
+          "eventType": "decisioning.propositionDisplay",
           "timestamp": timestamp,
           "_experienceplatform": {
             "identification": {
