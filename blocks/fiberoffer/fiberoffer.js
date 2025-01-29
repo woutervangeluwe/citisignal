@@ -123,13 +123,11 @@ export default function decorate(block) {
                   }
               });
             }
+          document.querySelector("#offerImage").style.display="block";
+          document.querySelector("#offerText").style.display="block";
+          document.querySelector("#offerCTA").style.display="block";
           }
         });
-
-        document.querySelector("#offerImage").style.display="block";
-        document.querySelector("#offerText").style.display="block";
-        document.querySelector("#offerCTA").style.display="block";
-
       } else {
         console.warn("Offer Decisioning Response unsuccessful:", response.body);
       }
