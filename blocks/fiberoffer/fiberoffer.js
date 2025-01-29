@@ -71,7 +71,7 @@ export default function decorate(block) {
                   "ECID": [
                     {
                       "authenticatedState": "authenticated",
-                      "id": '"'+ECID+'"',
+                      "id": ECID,
                       "primary": true
                     }
                   ]
