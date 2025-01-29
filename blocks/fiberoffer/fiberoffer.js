@@ -76,6 +76,7 @@ export default function decorate(block) {
 
         decisions.forEach(decision => {
           if(decision["type"] = "personalization:decisions"){
+            console.log("Offer Decisioning decision detail: ", decision);
             const payloads = decision;
             payloads.forEach(payload => {
               if(payload["placement"]["name"] == "Web - Image"){
