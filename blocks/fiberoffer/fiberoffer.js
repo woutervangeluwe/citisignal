@@ -82,6 +82,16 @@ async function getOffer(ECID) {
         },
         "query": {
           "personalization": {
+            "schemas": [
+              "https://ns.adobe.com/personalization/default-content-item",
+              "https://ns.adobe.com/personalization/html-content-item",
+              "https://ns.adobe.com/personalization/json-content-item",
+              "https://ns.adobe.com/personalization/redirect-item",
+              "https://ns.adobe.com/personalization/ruleset-item",
+              "https://ns.adobe.com/personalization/message/in-app",
+              "https://ns.adobe.com/personalization/message/content-card",
+              "https://ns.adobe.com/personalization/dom-action"
+            ],
             "decisionScopes": [
               "eyJ4ZG06YWN0aXZpdHlJZCI6ImRwczpvZmZlci1hY3Rpdml0eToxYTI3ODk3NzAzYTY5NWZmIiwieGRtOnBsYWNlbWVudElkIjoiZHBzOm9mZmVyLXBsYWNlbWVudDoxYTI0ZGM2MWJmYjJlMjIwIn0=",
               "eyJ4ZG06YWN0aXZpdHlJZCI6ImRwczpvZmZlci1hY3Rpdml0eToxYTI3ODk3NzAzYTY5NWZmIiwieGRtOnBsYWNlbWVudElkIjoiZHBzOm9mZmVyLXBsYWNlbWVudDoxYTI0ZGM0MzQyZjJlMjFlIn0="
