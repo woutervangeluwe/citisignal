@@ -1,4 +1,4 @@
-.offerText .offerCTA .offerImage{
+.offerText, .offerCTA, .offerImage{
     background-color: #8821F4;
     color: #14161A;
     padding: 0 0 24px;
