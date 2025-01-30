@@ -1,6 +1,6 @@
 .offerText, .offerCTA, .offerImage{
-    background-color: #8821F4;
     color: #14161A;
+    font-size: 30px;
     padding: 0 0 24px;
     display: flex;
     flex-direction: column;
