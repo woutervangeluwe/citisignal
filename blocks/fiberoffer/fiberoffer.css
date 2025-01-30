@@ -1,4 +1,4 @@
-.block.fiberoffer {
+.offerText .offerCTA .offerImage{
     background-color: #8821F4;
     color: #14161A;
     padding: 0 0 24px;
@@ -6,9 +6,4 @@
     flex-direction: column;
     margin: 1rem 0;
     text-align: center;
-}
-
-.block.fiberoffer blockfiberoffer {
-    margin: 16px;
-    text-indent: 0;
 }

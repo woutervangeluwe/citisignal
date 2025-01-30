@@ -32,10 +32,6 @@ export default function decorate(block) {
   document.querySelector("#offerCTA").style.display = "none";
   document.querySelector("#offerImage").style.display = "none";
 
-  const blockFiberOffer = document.createElement('blockFiberOffer');
-  blockFiberOffer.textContent = fiberOfferWrapper.textContent.trim();
-  fiberOfferWrapper.replaceChildren(blockFiberOffer);
-
   var ECID = "";
 
   alloy("getIdentity")
@@ -50,8 +46,6 @@ export default function decorate(block) {
       // The command failed.
       // "error" will be an error object with additional information.
     });
-
-
 }
 
 async function getOffer(ECID) {
