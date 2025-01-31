@@ -248,14 +248,6 @@ async function loadEager(doc) {
   await initializeDropins();
   decorateTemplateAndTheme();
 
-  if (main) {
-    decorateMain(main);
-    await Promise.all([
-      martechLoadedPromise.then(martechEager),
-      waitForLCP(LCP_BLOCKS),
-    ]);
-  }
-
   const isConsentGiven = true;
   const martechLoadedPromise = initMartech(
     // The WebSDK config
@@ -405,6 +397,15 @@ async function loadEager(doc) {
   } catch (e) {
     // do nothing
   }
+
+  if (main) {
+    decorateMain(main);
+    await Promise.all([
+      martechLoadedPromise.then(martechEager),
+      waitForLCP(LCP_BLOCKS),
+    ]);
+  }
+
 }
 
 /**
