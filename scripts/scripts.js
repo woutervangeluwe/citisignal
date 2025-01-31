@@ -21,6 +21,14 @@ import {
 import { getProduct, getSkuFromUrl, trackHistory } from './commerce.js';
 import initializeDropins from './dropins.js';
 
+import {
+  initMartech,
+  updateUserConsent,
+  martechEager,
+  martechLazy,
+  martechDelayed,
+} from '../plugins/martech/src/index.js';
+
 const LCP_BLOCKS = [
   'product-list-page',
   'product-list-page-custom',
@@ -240,6 +248,67 @@ async function loadEager(doc) {
   await initializeDropins();
   decorateTemplateAndTheme();
 
+  if (main) {
+    decorateMain(main);
+    await Promise.all([
+      martechLoadedPromise.then(martechEager),
+      waitForLCP(LCP_BLOCKS),
+    ]);
+  }
+
+  const isConsentGiven = true;
+  const martechLoadedPromise = initMartech(
+    // The WebSDK config
+    // Documentation: https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/configure/overview#configure-js
+    {
+      datastreamId: "045c5ee9-468f-47d5-ae9b-a29788f5948f",
+      orgId: "907075E95BF479EC0A495C73@AdobeOrg",
+      onBeforeEventSend: (payload) => {
+        // set custom Target params 
+        // see doc at https://experienceleague.adobe.com/en/docs/platform-learn/migrate-target-to-websdk/send-parameters#parameter-mapping-summary
+        payload.data.__adobe.target ||= {};
+
+        // set custom Analytics params
+        // see doc at https://experienceleague.adobe.com/en/docs/analytics/implementation/aep-edge/data-var-mapping
+        payload.data.__adobe.analytics ||= {};
+      },
+
+      // set custom datastream overrides
+      // see doc at:
+      // - https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/datastream-overrides
+      // - https://experienceleague.adobe.com/en/docs/experience-platform/datastreams/overrides
+      edgeConfigOverrides: {
+        // Override the datastream id
+        // datastreamId: '...'
+
+        // Override AEP event datasets
+        // com_adobe_experience_platform: {
+        //   datasets: {
+        //     event: {
+        //       datasetId: '...'
+        //     }
+        //   }
+        // },
+
+        // Override the Analytics report suites
+        // com_adobe_analytics: {
+        //   reportSuites: ['...']
+        // },
+
+        // Override the Target property token
+        // com_adobe_target: {
+        //   propertyToken: '...'
+        // }
+      },
+    },
+    // The library config
+    {
+      launchUrls: ["https://assets.adobedtm.com/b754ed1bed61/b9f7c7c484de/launch-28b548849fb9.min.js"],
+      personalization: !!getMetadata('target') && isConsentGiven,
+    },
+  );
+
+
   // Instrument experimentation plugin
   if (
     getMetadata('experiment') ||
@@ -345,6 +414,8 @@ async function loadEager(doc) {
 async function loadLazy(doc) {
   autolinkModals(doc);
 
+  await martechLazy();
+
   const main = doc.querySelector('main');
   await loadSections(main);
 
@@ -388,6 +459,12 @@ async function loadLazy(doc) {
 function loadDelayed() {
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
+
+  window.setTimeout(() => {
+    martechDelayed();
+    return import('./delayed.js');
+  }, 3000);
+
 }
 
 export async function fetchIndex(indexFile, pageSize = 500) {
