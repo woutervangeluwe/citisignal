@@ -402,11 +402,9 @@ async function loadEager(doc) {
     decorateMain(main);
     await Promise.all([
       martechLoadedPromise.then(martechEager),
-      waitForLCP(LCP_BLOCKS),
+      loadSection(main.querySelector('.section'), waitForFirstImage),
     ]);
   }
-
-
 }
 
 /**
