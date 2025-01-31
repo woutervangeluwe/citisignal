@@ -394,7 +394,7 @@ async function loadEager(doc) {
     document.body.classList.add('appear');
     await Promise.all([
       martechLoadedPromise.then(martechEager),
-      loadSection(main.querySelector('.section'), waitForFirstImage);
+      loadSection(main.querySelector('.section'), waitForFirstImage)
     ]);
   }
 }
