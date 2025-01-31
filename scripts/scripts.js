@@ -295,7 +295,7 @@ async function loadEager(doc) {
     },
     // The library config
     {
-      launchUrls: ["https://assets.adobedtm.com/b754ed1bed61/b9f7c7c484de/launch-28b548849fb9.min.js"],
+      launchUrls: ["https://assets.adobedtm.com/b754ed1bed61/b9f7c7c484de/launch-5fcd90e5b482-development.min.js"],
       personalization: !!getMetadata('target') && isConsentGiven,
     },
   );
