@@ -363,14 +363,6 @@ async function loadEager(doc) {
     pageType = 'Checkout';
   }
 
-  if (main) {
-    decorateMain(main);
-    await Promise.all([
-      martechLoadedPromise.then(martechEager)
-      //waitForLCP(LCP_BLOCKS),
-    ]);
-  }
-
   window.adobeDataLayer.push({
     pageContext: {
       pageType,
@@ -404,6 +396,14 @@ async function loadEager(doc) {
     }
   } catch (e) {
     // do nothing
+  }
+
+  if (main) {
+    decorateMain(main);
+    await Promise.all([
+      martechLoadedPromise.then(martechEager)
+      //waitForLCP(LCP_BLOCKS),
+    ]);
   }
 
 
