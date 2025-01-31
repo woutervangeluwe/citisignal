@@ -46,6 +46,58 @@ const AUDIENCES = {
   // define your custom audiences here as needed
 };
 
+const isConsentGiven = true;
+  const martechLoadedPromise = initMartech(
+    // The WebSDK config
+    // Documentation: https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/configure/overview#configure-js
+    {
+      datastreamId: "045c5ee9-468f-47d5-ae9b-a29788f5948f",
+      orgId: "907075E95BF479EC0A495C73@AdobeOrg",
+      onBeforeEventSend: (payload) => {
+        // set custom Target params 
+        // see doc at https://experienceleague.adobe.com/en/docs/platform-learn/migrate-target-to-websdk/send-parameters#parameter-mapping-summary
+        payload.data.__adobe.target ||= {};
+
+        // set custom Analytics params
+        // see doc at https://experienceleague.adobe.com/en/docs/analytics/implementation/aep-edge/data-var-mapping
+        payload.data.__adobe.analytics ||= {};
+      },
+
+      // set custom datastream overrides
+      // see doc at:
+      // - https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/datastream-overrides
+      // - https://experienceleague.adobe.com/en/docs/experience-platform/datastreams/overrides
+      edgeConfigOverrides: {
+        // Override the datastream id
+        // datastreamId: '...'
+
+        // Override AEP event datasets
+        // com_adobe_experience_platform: {
+        //   datasets: {
+        //     event: {
+        //       datasetId: '...'
+        //     }
+        //   }
+        // },
+
+        // Override the Analytics report suites
+        // com_adobe_analytics: {
+        //   reportSuites: ['...']
+        // },
+
+        // Override the Target property token
+        // com_adobe_target: {
+        //   propertyToken: '...'
+        // }
+      },
+    },
+    // The library config
+    {
+      launchUrls: ["https://assets.adobedtm.com/b754ed1bed61/b9f7c7c484de/launch-5fcd90e5b482-development.min.js"],
+      personalization: !!getMetadata('target') && isConsentGiven,
+    },
+  );
+
 /**
  * Gets all the metadata elements that are in the given scope.
  * @param {String} scope The scope/prefix for the metadata
@@ -248,59 +300,6 @@ async function loadEager(doc) {
   await initializeDropins();
   decorateTemplateAndTheme();
 
-
-  const isConsentGiven = true;
-  const martechLoadedPromise = initMartech(
-    // The WebSDK config
-    // Documentation: https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/configure/overview#configure-js
-    {
-      datastreamId: "045c5ee9-468f-47d5-ae9b-a29788f5948f",
-      orgId: "907075E95BF479EC0A495C73@AdobeOrg",
-      onBeforeEventSend: (payload) => {
-        // set custom Target params 
-        // see doc at https://experienceleague.adobe.com/en/docs/platform-learn/migrate-target-to-websdk/send-parameters#parameter-mapping-summary
-        payload.data.__adobe.target ||= {};
-
-        // set custom Analytics params
-        // see doc at https://experienceleague.adobe.com/en/docs/analytics/implementation/aep-edge/data-var-mapping
-        payload.data.__adobe.analytics ||= {};
-      },
-
-      // set custom datastream overrides
-      // see doc at:
-      // - https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/datastream-overrides
-      // - https://experienceleague.adobe.com/en/docs/experience-platform/datastreams/overrides
-      edgeConfigOverrides: {
-        // Override the datastream id
-        // datastreamId: '...'
-
-        // Override AEP event datasets
-        // com_adobe_experience_platform: {
-        //   datasets: {
-        //     event: {
-        //       datasetId: '...'
-        //     }
-        //   }
-        // },
-
-        // Override the Analytics report suites
-        // com_adobe_analytics: {
-        //   reportSuites: ['...']
-        // },
-
-        // Override the Target property token
-        // com_adobe_target: {
-        //   propertyToken: '...'
-        // }
-      },
-    },
-    // The library config
-    {
-      launchUrls: ["https://assets.adobedtm.com/b754ed1bed61/b9f7c7c484de/launch-5fcd90e5b482-development.min.js"],
-      personalization: !!getMetadata('target') && isConsentGiven,
-    },
-  );
-
   // Instrument experimentation plugin
   if (
     getMetadata('experiment') ||
@@ -313,8 +312,6 @@ async function loadEager(doc) {
 
     sampleRUM.enhance();
   }
-
-  window.adobeDataLayer = window.adobeDataLayer || [];
 
   let pageType = 'CMS';
   if (document.body.querySelector('main .product-details')) {
@@ -380,13 +377,6 @@ async function loadEager(doc) {
     });
   }
 
-  const main = doc.querySelector('main');
-  if (main) {
-    decorateMain(main);
-    document.body.classList.add('appear');
-    await loadSection(main.querySelector('.section'), waitForFirstImage);
-  }
-
   events.emit('eds/lcp', true);
 
   try {
@@ -398,11 +388,13 @@ async function loadEager(doc) {
     // do nothing
   }
 
+  const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    document.body.classList.add('appear');
     await Promise.all([
       martechLoadedPromise.then(martechEager),
-      loadSection(main.querySelector('.section'), waitForFirstImage),
+      loadSection(main.querySelector('.section'), waitForFirstImage);
     ]);
   }
 }
