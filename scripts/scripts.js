@@ -301,15 +301,6 @@ async function loadEager(doc) {
     },
   );
 
-
-  if (main) {
-    decorateMain(main);
-    await Promise.all([
-      martechLoadedPromise.then(martechEager)
-      //waitForLCP(LCP_BLOCKS),
-    ]);
-  }
-  
   // Instrument experimentation plugin
   if (
     getMetadata('experiment') ||
@@ -370,6 +361,14 @@ async function loadEager(doc) {
     pageType = 'Cart';
   } else if (document.body.querySelector('main .commerce-checkout')) {
     pageType = 'Checkout';
+  }
+
+  if (main) {
+    decorateMain(main);
+    await Promise.all([
+      martechLoadedPromise.then(martechEager)
+      //waitForLCP(LCP_BLOCKS),
+    ]);
   }
 
   window.adobeDataLayer.push({
