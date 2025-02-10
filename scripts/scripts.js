@@ -361,30 +361,45 @@ async function loadEager(doc) {
     pageType = 'Checkout';
   }
 
-  window.adobeDataLayer.push({
-    pageContext: {
-      pageType,
-      pageName: document.title,
-      eventType: 'visibilityHidden',
-      maxXOffset: 0,
-      maxYOffset: 0,
-      minXOffset: 0,
-      minYOffset: 0,
-    },
-    _experienceplatform: {
-      identification:{
-        core:{
-          ecid: "35010482655210571740823214174153820173"
-        }
-      }
-    },
-    web: {
-      webPageDetails:{
-        name: document.title,
-        URL: window.location.href
-      }
-    },
-  });
+  var ECID = "";
+  alloy("getIdentity")
+    .then(function (result) {
+      // The command succeeded.
+      console.log("ECID:", result.identity.ECID);
+      ECID = result.identity.ECID;
+      
+      window.adobeDataLayer.push({
+        pageContext: {
+          pageType,
+          pageName: document.title,
+          eventType: 'visibilityHidden',
+          maxXOffset: 0,
+          maxYOffset: 0,
+          minXOffset: 0,
+          minYOffset: 0,
+        },
+        _experienceplatform: {
+          identification:{
+            core:{
+              ecid: ECID
+            }
+          }
+        },
+        web: {
+          webPageDetails:{
+            name: document.title,
+            URL: window.location.href
+          }
+        },
+      });
+
+    })
+    .catch(function (error) {
+      // The command failed.
+      // "error" will be an error object with additional information.
+    });
+
+  
   if (pageType !== 'Product') {
     window.adobeDataLayer.push((dl) => {
       dl.push({ event: 'page-view', eventInfo: { ...dl.getState() } });
