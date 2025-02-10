@@ -53,6 +53,7 @@ const isConsentGiven = true;
     {
       datastreamId: "045c5ee9-468f-47d5-ae9b-a29788f5948f",
       orgId: "907075E95BF479EC0A495C73@AdobeOrg",
+      defaultConsent: 'in',
       onBeforeEventSend: (payload) => {
         // set custom Target params 
         // see doc at https://experienceleague.adobe.com/en/docs/platform-learn/migrate-target-to-websdk/send-parameters#parameter-mapping-summary
