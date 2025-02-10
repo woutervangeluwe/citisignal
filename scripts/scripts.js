@@ -46,7 +46,7 @@ const AUDIENCES = {
   // define your custom audiences here as needed
 };
 
-const isConsentGiven = true;
+  const isConsentGiven = true;
   const martechLoadedPromise = initMartech(
     // The WebSDK config
     // Documentation: https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/configure/overview#configure-js
