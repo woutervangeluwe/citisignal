@@ -371,6 +371,13 @@ async function loadEager(doc) {
       minXOffset: 0,
       minYOffset: 0,
     },
+    _experienceplatform: {
+      core:{
+        identification:{
+          ecid: "35010482655210571740823214174153820173"
+        }
+      }
+    },
   });
   if (pageType !== 'Product') {
     window.adobeDataLayer.push((dl) => {
