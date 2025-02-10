@@ -361,45 +361,30 @@ async function loadEager(doc) {
     pageType = 'Checkout';
   }
 
-  var ECID = "";
-  alloy("getIdentity")
-    .then(function (result) {
-      // The command succeeded.
-      console.log("ECID:", result.identity.ECID);
-      ECID = result.identity.ECID;
-      
-      window.adobeDataLayer.push({
-        pageContext: {
-          pageType,
-          pageName: document.title,
-          eventType: 'visibilityHidden',
-          maxXOffset: 0,
-          maxYOffset: 0,
-          minXOffset: 0,
-          minYOffset: 0,
-        },
-        _experienceplatform: {
-          identification:{
-            core:{
-              ecid: ECID
-            }
-          }
-        },
-        web: {
-          webPageDetails:{
-            name: document.title,
-            URL: window.location.href
-          }
-        },
-      });
-
-    })
-    .catch(function (error) {
-      // The command failed.
-      // "error" will be an error object with additional information.
-    });
-
-  
+  window.adobeDataLayer.push({
+    pageContext: {
+      pageType,
+      pageName: document.title,
+      eventType: 'visibilityHidden',
+      maxXOffset: 0,
+      maxYOffset: 0,
+      minXOffset: 0,
+      minYOffset: 0,
+    },
+    _experienceplatform: {
+      identification:{
+        core:{
+          ecid: sessionStorage.getItem("com.adobe.reactor.dataElements.ECID")
+        }
+      }
+    },
+    web: {
+      webPageDetails:{
+        name: document.title,
+        URL: window.location.href
+      }
+    },
+  });
   if (pageType !== 'Product') {
     window.adobeDataLayer.push((dl) => {
       dl.push({ event: 'page-view', eventInfo: { ...dl.getState() } });
