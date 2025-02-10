@@ -378,6 +378,11 @@ async function loadEager(doc) {
         }
       }
     },
+    web: {
+      webPageDetails:{
+        name: document.title
+      }
+    },
   });
   if (pageType !== 'Product') {
     window.adobeDataLayer.push((dl) => {
