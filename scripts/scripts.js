@@ -372,8 +372,8 @@ async function loadEager(doc) {
       minYOffset: 0,
     },
     _experienceplatform: {
-      core:{
-        identification:{
+      identification:{
+        core:{
           ecid: "35010482655210571740823214174153820173"
         }
       }
