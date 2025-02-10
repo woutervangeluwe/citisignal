@@ -383,7 +383,7 @@ async function loadEager(doc) {
         name: document.title,
         URL: window.location.href
       }
-    },
+    }
   });
   if (pageType !== 'Product') {
     window.adobeDataLayer.push((dl) => {
