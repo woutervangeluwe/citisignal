@@ -380,7 +380,8 @@ async function loadEager(doc) {
     },
     web: {
       webPageDetails:{
-        name: document.title
+        name: document.title,
+        URL: window.location.href
       }
     },
   });
