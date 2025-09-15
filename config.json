@@ -1,0 +1,40 @@
+{
+  "public": {
+    "default": {
+      "commerce-core-endpoint": "https://na1-sandbox.api.commerce.adobe.com/UfjgisUBMKxwqSKCNM8XUq/graphql",
+      "commerce-endpoint": "https://na1-sandbox.api.commerce.adobe.com/UfjgisUBMKxwqSKCNM8XUq/graphql",
+      "ac-environment-id": "UfjgisUBMKxwqSKCNM8XUq",
+      "headers": {
+        "all": {
+          "Store": "citisignal_us"
+        },
+        "cs": {
+          "Magento-Customer-Group": "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c",
+          "Magento-Store-Code": "citisignal_us",
+          "Magento-Store-View-Code": "citisignal_us",
+          "Magento-Website-Code": "citisignal_us"
+        }
+      },
+      "analytics": {
+        "base-currency-code": "USD",
+        "environment": "Testing",
+        "environment-id": "UfjgisUBMKxwqSKCNM8XUq",
+        "store-code": "citisignal_us",
+        "store-id": "citisignal_us",
+        "store-name": "CitiSignal US",
+        "store-url": "https://coresaas-subgraph-external:8000/UfjgisUBMKxwqSKCNM8XUq/",
+        "store-view-code": "citisignal_us",
+        "store-view-id": "citisignal_us",
+        "store-view-name": "CitiSignal US",
+        "website-code": "citisignal_us",
+        "website-id": "citisignal_us",
+        "website-name": "CitiSignal US"
+      },
+      "plugins": {
+        "picker": {
+          "rootCategory": "3"
+        }
+      }
+    }
+  }
+}
